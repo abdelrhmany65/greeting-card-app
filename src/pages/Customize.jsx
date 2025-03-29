@@ -8,7 +8,7 @@ const Customize = () => {
   const { id } = useParams();
   const [userName, setUserName] = useState("");
   const cardRef = useRef(null);
-  const MAX_NAME_LENGTH = 15;
+  const MAX_NAME_LENGTH = 29;
 
   // استخدم وحدات نسبية (rem) لضبط حجم الخط ليكون متجاوبًا مع حجم الشاشة
   const styleMapping = {
@@ -17,7 +17,7 @@ const Customize = () => {
       bottom: "30%", 
       left: "67%", 
       transform: "translateX(-50%)",
-      fontSize: "0.6rem",
+      fontSize: "1rem",
       fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
     },
     1: { 
@@ -25,7 +25,7 @@ const Customize = () => {
       bottom: "14%", 
       left: "38%", 
       transform: "translateX(-50%)",
-      fontSize: "0.6rem",
+      fontSize: "1rem",
       fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
     },
     2: { 
@@ -33,7 +33,7 @@ const Customize = () => {
       bottom: "16%", 
       left: "50%", 
       transform: "translateX(-50%)",
-      fontSize: "0.6rem",
+      fontSize: "1rem",
       fontFamily: "'Courier New', Courier, monospace"
     },
     3: { 
@@ -41,7 +41,7 @@ const Customize = () => {
       bottom: "25px", 
       left: "50%", 
       transform: "translateX(-50%)",
-      fontSize: "0.6rem",
+      fontSize: "1rem",
       fontFamily: "'Amiri', 'Traditional Arabic', sans-serif"
     },
     4: { 
@@ -49,7 +49,7 @@ const Customize = () => {
       bottom: "15%", 
       left: "50%", 
       transform: "translateX(-50%)",
-      fontSize: "0.6rem",
+      fontSize: "1rem",
       fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
     },
   };
