@@ -7,34 +7,57 @@ import styles from "./Customize.module.css";
 const Customize = () => {
   const { id } = useParams();
   const [userName, setUserName] = useState("");
-  const [arabicError, setArabicError] = useState(false);
-  const [lengthError, setLengthError] = useState(false);
   const cardRef = useRef(null);
   const MAX_NAME_LENGTH = 15;
 
+  // استخدم وحدات نسبية (rem) لضبط حجم الخط ليكون متجاوبًا مع حجم الشاشة
+  const styleMapping = {
+    0: { 
+      color: "#188896", 
+      bottom: "30%", 
+      left: "67%", 
+      transform: "translateX(-50%)",
+      fontSize: "0.6rem",
+      fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
+    },
+    1: { 
+      color: "#A8292A", 
+      bottom: "14%", 
+      left: "38%", 
+      transform: "translateX(-50%)",
+      fontSize: "0.6rem",
+      fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
+    },
+    2: { 
+      color: "#ED8EA6", 
+      bottom: "16%", 
+      left: "50%", 
+      transform: "translateX(-50%)",
+      fontSize: "0.6rem",
+      fontFamily: "'Courier New', Courier, monospace"
+    },
+    3: { 
+      color: "#333", 
+      bottom: "25px", 
+      left: "50%", 
+      transform: "translateX(-50%)",
+      fontSize: "0.6rem",
+      fontFamily: "'Amiri', 'Traditional Arabic', sans-serif"
+    },
+    4: { 
+      color: "#fff", 
+      bottom: "15%", 
+      left: "50%", 
+      transform: "translateX(-50%)",
+      fontSize: "0.6rem",
+      fontFamily: "'Thuluth', 'Traditional Arabic', sans-serif"
+    },
+  };
+
+  const cardStyle = styleMapping[id] || {};
+
   const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-  
-    if (inputValue === "") {
-      setUserName("");
-      setArabicError(false);
-      setLengthError(false);
-      return;
-    }
-
-    // التحقق من الأحرف العربية فقط
-    const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-    const isValid = arabicRegex.test(inputValue);
-    setArabicError(!isValid);
-
-    // التحقق من الحد الأقصى للحروف
-    const isWithinLimit = inputValue.length <= MAX_NAME_LENGTH;
-    setLengthError(!isWithinLimit);
-
-    // تحديث القيمة مع تطبيق القيود
-    if (isValid && isWithinLimit) {
-      setUserName(inputValue);
-    }
+    setUserName(e.target.value);
   };
 
   const handleDownload = () => {
@@ -50,10 +73,12 @@ const Customize = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>💖 أنشئ بطاقتك المميزة في لحظات</h1> 
+      <h1 className={styles.title}>💖 أنشئ بطاقتك المميزة في لحظات</h1>
       <div className={styles.cardPreview} ref={cardRef}>
         <img src={images[id]} alt="Selected Card" className={styles.image} />
-        <p className={styles.userName}>{userName}</p>
+        <p style={cardStyle} className={styles.userName}>
+          {userName}
+        </p>
       </div>
       <input
         type="text"
@@ -63,14 +88,6 @@ const Customize = () => {
         onChange={handleInputChange}
         maxLength={MAX_NAME_LENGTH}
       />
-      <div className={styles.errorContainer}>
-        {arabicError && (
-          <p className={styles.error}>يُرجى استخدام الأحرف العربية فقط</p>
-        )}
-        {lengthError && (
-          <p className={styles.error}>الحد الأقصى لعدد الأحرف هو {MAX_NAME_LENGTH}</p>
-        )}
-      </div>
       <button onClick={handleDownload} className={styles.downloadButton}>
         تحميل البطاقة
       </button>
